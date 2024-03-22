@@ -3,14 +3,12 @@
 Parser::Parser()
 {
 
-
 }
 
 Parser & Parser::operator=(Parser const &cpy);
 {
   *this = cpy;
   return (*this);
-
 }
 
 Parser::Parser(Parser const & cpy)
@@ -21,19 +19,27 @@ Parser::Parser(Parser const & cpy)
 
 Parser::~Parser()
 {
-  
+
 }
 
 void Parser::config_main(std::string path)
 {
-  
-
+  try 
+  {
+    if (openConfig(path) == 1)
+      throw GenericError("Error opening .conf");
+    if ()
+  }
+  catch (const std::exception&)
+  {
+    std::cout << e.what() << std::endl; 
+  } 
 }
 
-
-void Parser::openConfig(std::path)
+int Parser::openConfig(std::string path)
 {
-  if ()
-}
+  std::ifstream if;
 
+  if (if.open(path) )
+}
 

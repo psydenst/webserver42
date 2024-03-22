@@ -3,24 +3,33 @@
 
 #include <iostream>
 #include <vector>
+#include "ConfigFile.hpp"
 
 class Parser
 {
   private:
-    std::vector _Servers;
+    std::vector<ConfigFile> _Servers;
     int         _nbrServers;
+ 
+    void  createServer(std::string  config_path);
+    void  splitServer(std::string   server);
   public:
+
 // Canonical
     Parser();
     Parser &operator=(Parser const & cpy);
     Parser(Parser const & cpy);
     ~Parser();
 
-// Methods
-    void  openConfig(std::string path);
-    void  how_many_servers();
-    void  populate_servers();
+  
+// Getters
+    int getNbrServers();
 
+// Setters
+    int setNbrServers();
+
+// Methods
+    
 
 /*
     Etapas básicas do Parser:
@@ -33,8 +42,7 @@ class Parser
       - server name 
       - index
       - root
-
-   */ 
+*/ 
 
 
 };
