@@ -1,5 +1,6 @@
 #ifndef CONFIG_FILE
 
+#pragma once
 #include <iostream>
 #include <vector>
 #include <map>
@@ -21,25 +22,26 @@ class ConfigFile
   // Canonical
     ConfigFile( void );
     ConfigFile( const ConfigFile& copy );
-    ConfigFile> &operator=( const ConfigFile &src
+    ConfigFile &operator=( const ConfigFile &src);
     ~ConfigFile( void );
+
+/*
   // Setters
     void        setPort();
     void        setHost();
     void        set_serverName(int nbr);
     void        set_index(std::string server_name);
-    void        set_location(std::string server_name)
+    void        set_location(std::string server_name);
     void        set_root(std::string root);
   
-
   // Getters
     int         getPort();
     in_addr_t   getHost();
     std::string get_serverName(int nbr);
     std::string get_index(std::string server_name);
-    std::string get_location(std::string server_name)
+    std::string get_location(std::string server_name);
     std::string get_root();
-    
+*/    
 };
 
 #endif

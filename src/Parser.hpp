@@ -4,6 +4,7 @@
 #include <iostream>
 #include <vector>
 #include "ConfigFile.hpp"
+#include <fstream>
 
 class Parser
 {
@@ -11,7 +12,6 @@ class Parser
     std::vector<ConfigFile> _Servers;
     int         _nbrServers;
  
-    void  createServer(std::string  config_path);
     void  splitServer(std::string   server);
   public:
 
@@ -21,7 +21,6 @@ class Parser
     Parser(Parser const & cpy);
     ~Parser();
 
-  
 // Getters
     int getNbrServers();
 
@@ -29,8 +28,9 @@ class Parser
     int setNbrServers();
 
 // Methods
+    void  createServer(const std::string & config_path);
+    void  remove_coments(std::string line);
     
-
 /*
     Etapas básicas do Parser:
     - Pegar o caminho do arquivo
@@ -43,7 +43,6 @@ class Parser
       - index
       - root
 */ 
-
 
 };
 

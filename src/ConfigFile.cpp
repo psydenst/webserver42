@@ -1,37 +1,34 @@
 #include "ConfigFile.hpp"
 
-void  ParserServer::createServer(const std::string & config_path)
-{
-  std::ifstream ifs;
-  std::string   line;
-  std::string   servers;
-
-  ifs.open(config_path.c_str())
+  ConfigFile::ConfigFile()
   {
-    if (ifs.is_open())
-    {
-      while(std::getline(ifs, line))
-      {
- //       this->removeComents(line);
-  
-        servers += line;
-      }
-      ifs.close();
-      splitServer(servers);
-      this->_nbrServers = this->_servers.size();
-    }
-    else 
-      throw Error::InvalidPathServer();
+
   }
+
+  ConfigFile::ConfigFile(ConfigFile const & obj)
+  {
+      *this = obj;
+  }
+
+  ConfigFile & ConfigFile::operator=(ConfigFile const & obj)
+  {
+      this->_port = obj._port;
+      this->_host = obj._host;
+      this->_server_name = obj._server_name;
+      this->_index = obj._index;
+      this->_locations = obj._locations;
+      this->_root = obj._root;
+
+      return (*this);
+  }
+
+ConfigFile::~ConfigFile()
+{
+
 }
 
 
-
-
-
-
-
-
+/*
 // Divide uma string com todo o .conif concatendo
 // em várias strings.
 void ParserServer::splitServer(std::string & servers)
@@ -48,5 +45,6 @@ void ParserServer::splitServer(std::string & servers)
 
     }
 }
+*/
 
 
