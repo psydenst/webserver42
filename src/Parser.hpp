@@ -11,8 +11,11 @@ class Parser
   private:
     std::vector<ConfigFile> _Servers;
     int         _nbrServers;
- 
-    void  splitServer(std::string   server);
+    size_t      first_bracet;
+    size_t      last_bracet;
+    size_t      start;
+    size_t      end;
+    void        splitServer(std::string   server);
   public:
 
 // Canonical
@@ -30,7 +33,8 @@ class Parser
 // Methods
     void  createServer(const std::string & config_path);
     void  remove_coments(std::string line);
-    
+    void  findStart(std::string servers); 
+    void findEnd(std::string servers);
 /*
     Etapas básicas do Parser:
     - Pegar o caminho do arquivo

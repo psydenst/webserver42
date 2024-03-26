@@ -1,6 +1,11 @@
 #include "Parser.hpp"
-
+#include "utils/Error.hpp"
 #define L_RED			"\e[0;38;5;9m"
+#define L_GREEN			"\e[0;38;5;40m"
+#define L_PURPLE_D			"\e[0;38;5;90m"
+
+
+
 
 Parser::Parser()
 {
@@ -61,22 +66,68 @@ void Parser::remove_coments(std::string line)
 
 void Parser::splitServer(std::string servers)
 {
-  //
-  size_t  start;
-  size_t  end;
 
-  start = 0;
-  end = 0;
+  this->start = 0;
+  this->end = 0;
   std::cout << servers << std::endl;
- //  while (start < servers.size()) 
+  while (start < servers.size()) 
   {
     // avançar nos espaços fazer vazios
+    while (this->start < servers.size() && std::isspace(servers[this->start]))
+        this->start++;
     // comparar se o início é servers
+    if (servers.compare(0, 6, "server") != 0)
+      throw GenericError("Invalid configuration. \
+          \nYour .conf file should start with \"server\"");
     // encontrar start '{'
+    findStart(servers);
+    end = start;
+    findEnd(servers);
     // encontrar o '}'
-    // buildar com as refernências das posições start e end
-    // repetir até passar por todos os servers. 
+  //  buildVS();
+    // buildar o Virtual Server com as refernências das posições start e end
+    
+    // repetir até passar por todos os servers.
+    this->start++;
   }
 
+}
 
+void Parser::findStart(std::string servers)
+{
+  while(this->start < servers.size())
+  {
+    if (servers[this->start] == '{')
+    {
+      this->first_bracet = this->start;
+      break;
+    }
+    this->start++;
+  }
+
+  std::cout << L_GREEN << "Value of start is: " << start 
+  << "\n Just got out" << std::endl;
+}
+
+/*
+void Parser::findEnd(std::string servers)
+{
+
+}
+*/
+
+void Parser::findEnd(std::string servers)
+{
+  while(this->end < servers.size())
+  {
+    if (servers[this->end] == '}')
+    {
+      this->first_bracet = this->end;
+      break;
+    }
+    this->end++;
+  }
+
+  std::cout << L_RED << "Value of end is: " << end 
+  << "\n Just got out" << std::endl;
 }
